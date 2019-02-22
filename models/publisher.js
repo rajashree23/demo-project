@@ -4,11 +4,12 @@ var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
 
-    email: String,
+    email: {type:String,required:true,unique:true},
     password: {type:String, unique:true},
-    subscribers: {type:Array}
+
+
 
 });
 
-var userModel = mongoose.model('user',userSchema);
-module.exports = userModel;
+var userModel1 = mongoose.model('user',userSchema);
+module.exports = userModel1;
