@@ -1,12 +1,14 @@
-let mongoose = require('mongoose')
-let validator = require('validator')
+var mongoose = require('mongoose');
 
-let emailSchema = new mongoose.Schema({
-  email: {
-    type: String
-  },
+var Schema = mongoose.Schema;
 
-  password: {type: String}
+var userSchema = new Schema({
+
+    email: String,
+    password: {type:String, unique:true},
+    subscribers: {type:Array}
+
 });
 
-module.exports = mongoose.model('Email', emailSchema)
+var userModel = mongoose.model('user',userSchema);
+module.exports = userModel;
