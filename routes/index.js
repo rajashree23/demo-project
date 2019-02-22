@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var userModel = require('../controller/create');
+var userModel1 = require('../controller/publisher');
+
 
 
 /* GET home page. */
@@ -11,6 +12,9 @@ router.get('/', function(req, res, next) {
 
 })
 
+router.get('/publisher', function(req, res, next) {
+  res.render('publisher');
+})
 
 router.get('/subscriber', function(req, res, next) {
   res.render('subscriber');
@@ -18,22 +22,5 @@ router.get('/subscriber', function(req, res, next) {
 
 })
 
-
-
-router.post('/login', function(req, res){
-    // new code should come over here
-    userModel.findOne({email: req.body.email, password: req.body.password}, function(err, user){
-        if(err) {
-            console.log(err);
-        }
-        else if(user){
-            res.redirect('/subscriber');
-        }
-        else {
-            console.log('Invalid');
-        }
-    });
-
-});
 
 module.exports = router;
