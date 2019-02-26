@@ -1,18 +1,19 @@
-var mongoose = require('mongoose');
+/*var mongoose = require('mongoose');
 var userModel1 = require('../models/publisher');
 var userModel2 = require('../models/subscriber');
 
 var login = function(req, res) {
     userModel1.find({
         email: req.body.email
-    }), function(err, user) {
+        console.log(email);
+    }, function(err, user) {
         if (err) throw err;
         if (user) {
-            res.redirect('index/publisher');
+            res.redirect('/publisher');
           }
             else{
                    userModel2.find({
-                     email:req.body.email,function(err,user){
+                     email:req.body.email},function(err,user){
                         if(err)throw err;
                         if (user) {
                           res.redirect('/subscriber');
@@ -20,15 +21,13 @@ var login = function(req, res) {
                         else {
                           return res.render('login',{"msg":"Wrong email or password, Please try again..!!"});
                         }
-                          }
-                        }
-                   )
+
+                   })
             }
+})
 
                 req.session.user = details;
-}
-}
-  
+
 //
 // var issue = function(req, res) {
 //     issueModel.find({}, function(err, docs) {
@@ -44,5 +43,5 @@ var login = function(req, res) {
 // };
 
 module.exports = {
-    "login": login
-};
+    "login": login,
+}*/

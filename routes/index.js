@@ -1,7 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-var userModel1 = require('../controller/publisher');
+
+
+var userModel1 = require('../models/publisher');
+var userModel2 = require('../models/subscriber');
+
+
+//var userModel1 = require('../controller/login');
 
 
 
@@ -21,6 +26,25 @@ router.get('/subscriber', function(req, res, next) {
 
 
 })
+
+router.post('/login',function(req,res,next){
+  var email = req.body.email;
+  if(userModel1.find({'email':email}))
+  {
+    res.redirect('/publisher');
+  }
+  else if (userModel2.find({'email':email}))
+    {
+      res.redirect('/subscriber');
+    }
+
+
+    else {
+      console.log("invalid");
+    }
+
+
+});
 
 
 module.exports = router;
