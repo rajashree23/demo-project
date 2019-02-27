@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var session = require('express-session');
+var pfa= require('pfafman:filesaver');
+var papa= require('harrison:papa-parse');
 
 var app = express();
 
@@ -24,6 +26,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({path:"/",secret:"nosecretcoden",resave:false,saveUninitialize:false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
