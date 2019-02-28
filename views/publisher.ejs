@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script>
-  function myfunction(){
-    var data = user1.find().fetch();
-  var yourCSVData = JSON2CSV(data);
-  var blob = new Blob([yourCSVData],
-                    {type: "text/csv;charset=utf-8"});
-  saveAs(blob, "subscriberlist.csv");
-}
-   </script>
+
 <style>
 .button {
   background-color: #4CAF50;
@@ -28,7 +20,14 @@
 <body>
 
 
-<button onclick="myfunction" class="button" >Download as CSV</button>
+<form action="click" method="get">
+  <div class="container-login100-form-btn">
+     <input type="submit" class="button" value="Download as csv">
+
+
+   </div>
+
+</form>
 <form action="logout" method="get">
   <div class="container-login100-form-btn">
     <input type="submit" class="login100-form-btn" value="Logout">
