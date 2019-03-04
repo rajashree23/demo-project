@@ -12,6 +12,8 @@
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "json2csv": "^4.3.5",
+    "moment": "^2.24.0",
+    "mongo-date-query": "^1.0.3",
     "mongoose": "^5.4.14",
     "morgan": "~1.9.0"
   }
