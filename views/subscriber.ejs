@@ -2,28 +2,40 @@
 <html>
 <head>
 <style>
-/*.button {
+.button {
   background-color: #4CAF50;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 10px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 10px;
   margin: 4px 2px;
   cursor: pointer;
-}*/
+}
 
 </style>
 </head>
 <body>
+<table>
+      <% for(let i = 0;i < email.length ; i++){ %>
+        <tr>
+        <td>
+      <div class="list-group-item" >
+          <span><%- email[i].email %></span></div>
+        </td>
+          <td>
+            <a href="#" class="button" id="download">Subscribe</a>
+          </td>
+          <td><a href="#" class="button" id="download">Unsubscribe</a></td>
+        </tr>
 
+      <% } %>
+
+</table>
   <div class="list-group">
-        <% for(let i = 0;i < email.length ; i++){ %>
-        <div class="list-group-item" >
-            <span><%- email[i].email %></span><a href="#" class="button" id="download">Subscribe</a></div>
-        <% } %>
+
     </div>
 
   <form action="logout" method="get">
