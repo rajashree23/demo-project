@@ -13,7 +13,7 @@ const moment = require('moment');
 const mdq = require('mongo-date-query');
 const json2csv = require('json2csv').parse;
 const path = require('path')
-const fields = ['email'];
+const fields = ['email','password'];
 
 
 //var userModel1 = require('../controller/login');
@@ -22,9 +22,16 @@ const fields = ['email'];
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
-
-
+  if(req.session.user)
+  {
+    if(req.session.type=="publisher")
+     res.redirect('/publisher')
+     else {
+       res.redirect('/subscriber')
+     }
+  }
+  else
+    res.render('index');
 })
 
 router.get('/publisher', function(req, res, next) {
@@ -40,13 +47,22 @@ else {
 
 router.get('/subscriber', function(req, res, next) {
   if (req.session.user) {
-   res.render('subscriber', {
-   'user': req.session.user
-        });
-  }
+    userModel1.find({}, 'email', function(err,docs){
+      if(!err){
+        console.log(docs);
+        res.render('subscriber',{
+           'user': req.session.user,
+            'email':docs
+         });
+       }
+     });
+      }
+
+
 else {
     res.redirect('/login')
      }
+
 
 
 })
@@ -63,6 +79,7 @@ router.post('/login',function(req,res,next){
         console.log(user);
 
         req.session.user=user[0];
+        req.session.type="subscriber";
         console.log(req.session.user);
 
        res.redirect('/subscriber');
@@ -80,6 +97,7 @@ router.post('/login',function(req,res,next){
             console.log('publisher');
 
             req.session.user=user[0];
+              req.session.type="publisher";
               console.log(req.session);
                res.redirect('/publisher');
 
@@ -131,9 +149,7 @@ router.get('/click', function (req, res) {
           return res.json(err).status(500);
         }
         else {
-          setTimeout(function () {
-            fs.unlinkSync(filePath); // delete this file after 30 seconds
-          }, 30000)
+
           return res.json("/exports/csv-" + dateTime + ".csv");
         }
       });
@@ -141,5 +157,7 @@ router.get('/click', function (req, res) {
     }
   })
 })
+
+
 
 module.exports = router;

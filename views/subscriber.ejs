@@ -2,7 +2,7 @@
 <html>
 <head>
 <style>
-.button {
+/*.button {
   background-color: #4CAF50;
   border: none;
   color: white;
@@ -13,16 +13,28 @@
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-}
+}*/
+
 </style>
 </head>
 <body>
-  <a href="#" class="button" id="download">Subscribe</a>
+
+  <div class="list-group">
+        <% for(let i = 0;i < email.length ; i++){ %>
+        <div class="list-group-item" >
+            <span><%- email[i].email %></span><a href="#" class="button" id="download">Subscribe</a></div>
+        <% } %>
+    </div>
+
   <form action="logout" method="get">
+
     <div class="container-login100-form-btn">
+
       <input type="submit" class="login100-form-btn" value="Logout">
 
 
+
     </div>
+
   </form>
 </body>
