@@ -16,7 +16,7 @@ const path = require('path')
 const fields = ['email','password'];
 
 
-//var userModel1 = require('../controller/login');
+//var userModel1 = require('../controller/');
 
 
 
@@ -41,7 +41,7 @@ router.get('/publisher', function(req, res, next) {
         });
   }
 else {
-    res.redirect('/login')
+    res.redirect('/')
      }
 })
 
@@ -60,11 +60,36 @@ router.get('/subscriber', function(req, res, next) {
 
 
 else {
-    res.redirect('/login')
+    res.redirect('/')
      }
 
 
 
+})
+
+router.get('/subscribe/:email',function(req,res,next){
+  var email = req.params.email;
+  console.log(email);
+  console.log("this");
+  console.log(req.session.user.email);
+  userModel1.findOneAndUpdate({'email':email},
+  {$push: {mysubscriber:req.session.user.email}},
+  function(err,raw){
+    console.log(raw);
+     res.redirect('/subscriber');
+  })
+})
+
+router.get('/unsubscribe/:email',function(req,res,next){
+  var email = req.params.email;
+
+  console.log(req.session.user.email);
+  userModel1.findOneAndUpdate({'email':email},
+  {$pull: {"mysubscriber":req.session.user.email}},
+  function(err,raw){
+    console.log(raw);
+     res.redirect('/subscriber');
+  })
 })
 
 router.post('/login',function(req,res,next){
@@ -72,15 +97,14 @@ router.post('/login',function(req,res,next){
 
   userModel2.find({'email':email},function(err,user){
     console.log(err);
-    console.log(user);
+
      if(user.length ==1){
        console.log('subscriber');
        if(user[0].password==req.body.pass){
-        console.log(user);
 
         req.session.user=user[0];
         req.session.type="subscriber";
-        console.log(req.session.user);
+
 
        res.redirect('/subscriber');
 
@@ -92,13 +116,12 @@ router.post('/login',function(req,res,next){
      else{
        userModel1.find({'email' :email},function(err,user){
           if(user.length==1){
-            console.log('publisher');
+
             if(user[0].password==req.body.pass){
-            console.log('publisher');
 
             req.session.user=user[0];
               req.session.type="publisher";
-              console.log(req.session);
+
                res.redirect('/publisher');
 
 

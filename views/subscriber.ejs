@@ -26,9 +26,9 @@
           <span><%- email[i].email %></span></div>
         </td>
           <td>
-            <a href="#" class="button" id="download">Subscribe</a>
+            <a href="/subscribe/<%- email[i].email %>" class="button">Subscribe</a>
           </td>
-          <td><a href="#" class="button" id="download">Unsubscribe</a></td>
+          <td><a href="/unsubscribe/<%- email[i].email %>" class="button">Unsubscribe</a></td>
         </tr>
 
       <% } %>
